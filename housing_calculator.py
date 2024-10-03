@@ -1,11 +1,7 @@
 import streamlit as st
-import locale
-
-# Set locale to Danish
-locale.setlocale(locale.LC_ALL, 'da_DK.UTF-8')
 
 def format_currency(amount):
-    return locale.currency(amount, grouping=True, symbol='DKK')
+    return f"{amount:,.0f} DKK".replace(",", ".")
 
 def calculate_loan_expense(loan_amount):
     return (loan_amount / 100000) * 450
