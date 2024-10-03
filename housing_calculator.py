@@ -49,6 +49,7 @@ with col3:
 with col4:
     st.subheader('Årlig')
     st.subheader('')
+    st.subheader('')
     st.write(f'Låne-udgift pr. år: {format_currency(loan_expense * 12)}')
     property_tax_yearly = st.number_input('Ejendomsskat (Årlig)', value=property_tax*12, step=1000, format='%d', key='property_tax_yearly')
     house_utilities_yearly = st.number_input('Vand, varme, el (Årlig)', value=house_utilities*12, step=1000, format='%d', key='house_utilities_yearly')
