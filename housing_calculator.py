@@ -49,6 +49,7 @@ with col3:
 with col4:
     st.subheader('Årlig')
     st.write(f'Låne-udgift pr. år: {format_currency(loan_expense * 12)}')
+    st.markdown("<br>", unsafe_allow_html=True)  # Tilføjer padding
     property_tax_yearly = st.number_input('Ejendomsskat (Årlig)', value=property_tax*12, step=1000, format='%d', key='property_tax_yearly')
     house_utilities_yearly = st.number_input('Vand, varme, el (Årlig)', value=house_utilities*12, step=1000, format='%d', key='house_utilities_yearly')
     maintenance_yearly = st.number_input('Vedligehold (Årlig)', value=maintenance*12, step=500, format='%d', key='maintenance_yearly')
@@ -67,6 +68,7 @@ with col5:
 with col6:
     st.write(f'Hus pr. måned: {format_currency(house_total_monthly)}')
 
+savings_monthly = house_total_monthly - rent_total_monthly
 if savings_monthly > 0:
     st.info(f'I dette tilfælde er det billigst at leje. Besparelse: {format_currency(savings_monthly)} pr. måned.')
 elif savings_monthly < 0:
@@ -78,7 +80,6 @@ st.markdown("---")  # Horisontal linje
 
 # Opsparing sektion
 st.header('Opsparing')
-savings_monthly = house_total_monthly - rent_total_monthly
 savings_yearly = house_total_yearly - rent_total_yearly
 monthly_goal = st.number_input('Ønsket månedlig opsparing', value=5000, step=100, format='%d')
 
