@@ -67,6 +67,13 @@ with col5:
 with col6:
     st.write(f'Hus pr. måned: {format_currency(house_total_monthly)}')
 
+if savings_monthly > 0:
+    st.info(f'I dette tilfælde er det billigst at leje. Besparelse: {format_currency(savings_monthly)} pr. måned.')
+elif savings_monthly < 0:
+    st.info(f'I dette tilfælde er det billigst at eje. Besparelse: {format_currency(-savings_monthly)} pr. måned.')
+else:
+    st.info('I dette tilfælde er omkostningerne ens for at leje og eje.')
+
 st.markdown("---")  # Horisontal linje
 
 # Opsparing sektion
@@ -82,10 +89,3 @@ if savings_monthly >= monthly_goal:
     st.success(f'Du når dit månedlige opsparingsmål på {format_currency(monthly_goal)}!')
 else:
     st.warning(f'Du mangler {format_currency(monthly_goal - savings_monthly)} for at nå dit månedlige opsparingsmål.')
-
-if savings_monthly > 0:
-    st.info(f'I dette tilfælde er det billigst at leje. Besparelse: {format_currency(savings_monthly)} pr. måned.')
-elif savings_monthly < 0:
-    st.info(f'I dette tilfælde er det billigst at eje. Besparelse: {format_currency(-savings_monthly)} pr. måned.')
-else:
-    st.info('I dette tilfælde er omkostningerne ens for at leje og eje.')
