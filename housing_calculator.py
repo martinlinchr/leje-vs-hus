@@ -48,7 +48,6 @@ with col3:
 
 with col4:
     st.subheader('Årlig')
-    st.header('')
     st.write(f'Låne-udgift pr. år: {format_currency(loan_expense * 12)}')
     property_tax_yearly = st.number_input('Ejendomsskat (Årlig)', value=property_tax*12, step=1000, format='%d', key='property_tax_yearly')
     house_utilities_yearly = st.number_input('Vand, varme, el (Årlig)', value=house_utilities*12, step=1000, format='%d', key='house_utilities_yearly')
@@ -60,11 +59,21 @@ with col4:
 
 st.markdown("---")  # Horisontal linje
 
-# Sammenligning sektion
+# Sammenligning af månedlige udgifter
+st.header('Sammenligning af månedlige udgifter')
+col5, col6 = st.columns(2)
+with col5:
+    st.write(f'Leje pr. måned: {format_currency(rent_total_monthly)}')
+with col6:
+    st.write(f'Hus pr. måned: {format_currency(house_total_monthly)}')
+
+st.markdown("---")  # Horisontal linje
+
+# Opsparing sektion
 st.header('Opsparing')
 savings_monthly = house_total_monthly - rent_total_monthly
 savings_yearly = house_total_yearly - rent_total_yearly
-monthly_goal = 5000
+monthly_goal = st.number_input('Ønsket månedlig opsparing', value=5000, step=100, format='%d')
 
 st.write(f'Månedlig besparelse ved at leje: {format_currency(savings_monthly)}')
 st.write(f'Årlig besparelse ved at leje: {format_currency(savings_yearly)}')
@@ -75,8 +84,8 @@ else:
     st.warning(f'Du mangler {format_currency(monthly_goal - savings_monthly)} for at nå dit månedlige opsparingsmål.')
 
 if savings_monthly > 0:
-    st.info('Positiv opsparing: Det er billigere at leje end at eje.')
+    st.info(f'I dette tilfælde er det billigst at leje. Besparelse: {format_currency(savings_monthly)} pr. måned.')
 elif savings_monthly < 0:
-    st.info('Negativ opsparing: Det er dyrere at leje end at eje.')
+    st.info(f'I dette tilfælde er det billigst at eje. Besparelse: {format_currency(-savings_monthly)} pr. måned.')
 else:
-    st.info('Ingen opsparing: Omkostningerne er ens for at leje og eje.')
+    st.info('I dette tilfælde er omkostningerne ens for at leje og eje.')
