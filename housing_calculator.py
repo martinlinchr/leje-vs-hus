@@ -40,10 +40,9 @@ with col3:
     
     property_tax = st.number_input('Ejendomsskat (Månedlig)', value=1600, step=100, format='%d', key='property_tax_monthly')
     house_utilities = st.number_input('Vand, varme, el (Månedlig)', value=2500, step=100, format='%d', key='house_utilities_monthly')
-    maintenance = st.number_input('Vedligehold (Månedlig)', value=750, step=50, format='%d', key='maintenance_monthly')
     insurance = st.number_input('Husforsikring (Månedlig)', value=500, step=50, format='%d', key='insurance_monthly')
     
-    house_total_monthly = loan_expense + property_tax + house_utilities + maintenance + insurance
+    house_total_monthly = loan_expense + property_tax + house_utilities + insurance
     st.write(f'Total pr. måned: {format_currency(house_total_monthly)}')
 
 with col4:
@@ -54,10 +53,9 @@ with col4:
     st.markdown("<br>", unsafe_allow_html=True)  # Tilføjer padding
     property_tax_yearly = st.number_input('Ejendomsskat (Årlig)', value=property_tax*12, step=1000, format='%d', key='property_tax_yearly')
     house_utilities_yearly = st.number_input('Vand, varme, el (Årlig)', value=house_utilities*12, step=1000, format='%d', key='house_utilities_yearly')
-    maintenance_yearly = st.number_input('Vedligehold (Årlig)', value=maintenance*12, step=500, format='%d', key='maintenance_yearly')
     insurance_yearly = st.number_input('Husforsikring (Årlig)', value=insurance*12, step=500, format='%d', key='insurance_yearly')
     
-    house_total_yearly = (loan_expense * 12) + property_tax_yearly + house_utilities_yearly + maintenance_yearly + insurance_yearly
+    house_total_yearly = (loan_expense * 12) + property_tax_yearly + house_utilities_yearly + insurance_yearly
     st.write(f'Total pr. år: {format_currency(house_total_yearly)}')
 
 st.markdown("---")  # Horisontal linje
