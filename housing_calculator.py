@@ -61,7 +61,7 @@ with col4:
 st.markdown("---")  # Horisontal linje
 
 # Sammenligning sektion
-st.header('Sammenligning')
+st.header('Opsparing')
 savings_monthly = house_total_monthly - rent_total_monthly
 savings_yearly = house_total_yearly - rent_total_yearly
 monthly_goal = 5000
