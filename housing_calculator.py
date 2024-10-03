@@ -51,6 +51,8 @@ with col4:
     st.write(f'Låne-udgift pr. år: {format_currency(loan_expense * 12)}')
     st.markdown("<br>", unsafe_allow_html=True)  # Tilføjer padding
     st.markdown("<br>", unsafe_allow_html=True)  # Tilføjer padding
+    st.markdown("<br>", unsafe_allow_html=True)  # Tilføjer padding
+    st.markdown("<br>", unsafe_allow_html=True)  # Tilføjer padding
     property_tax_yearly = st.number_input('Ejendomsskat (Årlig)', value=property_tax*12, step=1000, format='%d', key='property_tax_yearly')
     house_utilities_yearly = st.number_input('Vand, varme, el (Årlig)', value=house_utilities*12, step=1000, format='%d', key='house_utilities_yearly')
     maintenance_yearly = st.number_input('Vedligehold (Årlig)', value=maintenance*12, step=500, format='%d', key='maintenance_yearly')
