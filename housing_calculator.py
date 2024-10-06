@@ -82,13 +82,13 @@ st.markdown("---")  # Horisontal linje
 st.header('Opsparing')
 monthly_goal = st.number_input('Ønsket månedlig opsparing', value=5000, step=100, format='%d')
 
-# Checkbox for at vælge mellem leje og hus
-is_renting = st.checkbox('Jeg vælger at leje')
+# Radio buttons for at vælge mellem leje og hus
+choice = st.radio("Vælg boligform for opsparingsberegning:", ('Leje', 'Hus'))
 
-if is_renting:
+if choice == 'Leje':
     monthly_expense = rent_total_monthly
     savings = house_total_monthly - rent_total_monthly
-else:
+else:  # Hus
     monthly_expense = house_total_monthly
     savings = rent_total_monthly - house_total_monthly
 
