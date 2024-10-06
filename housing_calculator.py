@@ -68,11 +68,11 @@ with col5:
 with col6:
     st.write(f'Hus pr. måned: {format_currency(house_total_monthly)}')
 
-savings_monthly = house_total_monthly - rent_total_monthly
-if savings_monthly > 0:
-    st.info(f'I dette tilfælde er det billigst at leje. Besparelse: {format_currency(savings_monthly)} pr. måned.')
-elif savings_monthly < 0:
-    st.info(f'I dette tilfælde er det billigst at eje. Besparelse: {format_currency(-savings_monthly)} pr. måned.')
+difference_monthly = abs(house_total_monthly - rent_total_monthly)
+if house_total_monthly > rent_total_monthly:
+    st.info(f'I dette tilfælde er det billigst at leje. Forskel: {format_currency(difference_monthly)} pr. måned.')
+elif house_total_monthly < rent_total_monthly:
+    st.info(f'I dette tilfælde er det billigst at eje. Forskel: {format_currency(difference_monthly)} pr. måned.')
 else:
     st.info('I dette tilfælde er omkostningerne ens for at leje og eje.')
 
@@ -80,13 +80,29 @@ st.markdown("---")  # Horisontal linje
 
 # Opsparing sektion
 st.header('Opsparing')
-savings_yearly = house_total_yearly - rent_total_yearly
 monthly_goal = st.number_input('Ønsket månedlig opsparing', value=5000, step=100, format='%d')
 
-st.write(f'Månedlig besparelse ved at leje: {format_currency(savings_monthly)}')
-st.write(f'Årlig besparelse ved at leje: {format_currency(savings_yearly)}')
+# Checkbox for at vælge mellem leje og hus
+is_renting = st.checkbox('Jeg vælger at leje')
 
-if savings_monthly >= monthly_goal:
-    st.success(f'Du når dit månedlige opsparingsmål på {format_currency(monthly_goal)}!')
+if is_renting:
+    monthly_expense = rent_total_monthly
+    savings = house_total_monthly - rent_total_monthly
 else:
-    st.warning(f'Du mangler {format_currency(monthly_goal - savings_monthly)} for at nå dit månedlige opsparingsmål.')
+    monthly_expense = house_total_monthly
+    savings = rent_total_monthly - house_total_monthly
+
+savings_yearly = savings * 12
+
+st.write(f'Månedlig besparelse: {format_currency(savings)}')
+st.write(f'Årlig besparelse: {format_currency(savings_yearly)}')
+
+if savings >= monthly_goal:
+    st.success(f'Du når dit månedlige opsparingsmål på {format_currency(monthly_goal)}!')
+    extra_savings = savings - monthly_goal
+    st.write(f'Du sparer endda {format_currency(extra_savings)} ekstra pr. måned.')
+else:
+    shortfall = monthly_goal - savings
+    st.warning(f'Du mangler {format_currency(shortfall)} for at nå dit månedlige opsparingsmål på {format_currency(monthly_goal)}.')
+    required_income = monthly_expense + monthly_goal
+    st.write(f'For at nå dit opsparingsmål skal du have en månedlig indkomst på mindst {format_currency(required_income)}.')
